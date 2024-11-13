@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:local="clr-namespace:CalculadoraPropinas.Model"
+              xmlns:local1="clr-namespace:CalculadoraPropinas.ViewModel"
+             x:Class="CalculadoraPropinas.Views.NewPage1"
+             Title="Calculadora">
+
+    <ContentPage.BindingContext>
+        <local1:CalculadoraPropinaViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout Padding="20">
+        <Frame CornerRadius="20" BackgroundColor="LightGray" Padding="20">
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="*,Auto,Auto">
+                <!--Importe-->
+                <Label Text="importe:" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" FontSize="18" />
+                <Entry Text="{Binding CostoServicio}" Placeholder="Ingrese el costo" Keyboard="Numeric" FontSize="18" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,0,10" />
+
+                <!-- Número de personas -->
+                <Label Text="Número de personas:" FontSize="18" Margin="0,10,0,0" 
+                       Grid.Row="1" Grid.Column="0" VerticalOptions="Center" />
+                <Entry Text="{Binding NumeroPersonas}" Placeholder="Ingrese el número de personas" Keyboard="Numeric" FontSize="18"
+                       Grid.Row="1" Grid.Column="1" HorizontalOptions="Fill" Margin="0,0,0,10"/>
+                <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="2" HorizontalOptions="End" Spacing="10">
+                    <Button Text="−" WidthRequest="30" HeightRequest="30" BorderColor="Transparent" />
+                    <Button Text="+" WidthRequest="30" HeightRequest="30" BorderColor="Transparent"/>
+                </StackLayout>
+
+                <!-- Porcentaje de propina (botones de selección) -->
+                <Label Text="Porcentaje de Propina:" FontSize="18" Margin="0,10,0,0"
+                       Grid.Row="2" Grid.Column="0" VerticalOptions="Center"/>
+                <StackLayout Orientation="Horizontal" 
+                             Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10">
+                    <Button Text="8%" Clicked="OnPorcentajePropinaClicked"  TextColor="White" />
+                    <Button Text="10%" Clicked="OnPorcentajePropinaClicked"  TextColor="White" />
+                    <Button Text="12.5%" Clicked="OnPorcentajePropinaClicked" TextColor="White" />
+                    <Button Text="15%" Clicked="OnPorcentajePropinaClicked"  TextColor="White" />
+                </StackLayout>
+                <!-- Porcentaje de propina ajustable -->
+                <Entry x:Name="propinaEntry" Keyboard="Numeric" Grid.Row="3" Grid.Column="1" HorizontalOptions="Fill" />
+                <StackLayout Orientation="Horizontal" Grid.Row="3" Grid.Column="2" HorizontalOptions="End" Spacing="10">
+
+                    <Button Text="−" WidthRequest="30" HeightRequest="30"  BorderColor="Transparent"  />
+                    <Button Text="+" WidthRequest="30" HeightRequest="30"  BorderColor="Transparent"  />
+                </StackLayout>
+            </Grid>
+        </Frame>
+
+        <!--botones de acciones-->
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,20,0,0" Spacing="20" >
+            <Button Text="Calcular" Clicked="OnCalcularClicked"  TextColor="White" />
+            <Button Text="Limpiar" Clicked="OnLimpiarClicked"  TextColor="White" />
+        </StackLayout>
+
+        <Frame CornerRadius="20" BackgroundColor="LightGray" Padding="20" Margin="0,20,0,0">
+            <StackLayout>
+                <Label Text="{Binding Resultado}" FontSize="18" />
+                <Label Text="{Binding TotalPagar, StringFormat='Total a pagar: {0:C2}'}" FontSize="18" />
+                <Label Text="{Binding TotalPagarPorPersona, StringFormat='Total a pagar por persona: {0:C2}'}" FontSize="18" />
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+
+
+</ContentPage>
+
